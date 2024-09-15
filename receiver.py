@@ -22,7 +22,7 @@ def on_message(client, userdata, msg):
     else:
         print(f"LOG> {str(client._client_id)}: {msg.payload.decode()}")
         #### Play music
-        if os.getenv("MODE") == "demo":
+        if os.getenv("isDemoMode") == "True":
             audio_path = get_demo_path(msg.payload.decode().split(":")[1].replace(" ", ""))
         else:
             audio_path = msg.payload.decode().split(":")[1].replace(" ", "")
