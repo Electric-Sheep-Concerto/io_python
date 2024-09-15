@@ -10,7 +10,7 @@ def on_message(client, userdata, msg):
     if "LOG>" in msg.payload.decode() or str(client._client_id) == clientId: # ログ出力
         return
     else:
-        #### 音声出力の処理（仮実装
+        #### Play music
         play("sample.mp3")
         pass
 
