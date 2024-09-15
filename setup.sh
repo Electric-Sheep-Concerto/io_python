@@ -11,5 +11,7 @@ else
     exit 1
 fi
 nohup python tx.py &
+echo "Started tx.py"
 nohup python rx.py &
+echo "Started rx.py"
 EOF
