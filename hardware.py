@@ -26,7 +26,7 @@ def record_button_presses():
     global bit_pattern
     bit_pattern = []  # Reset the bit pattern
 
-    while len(bit_pattern) < 4:
+    while len(bit_pattern) < 8:
         if GPIO.input(PIN_RIGHT_BUTTON) == GPIO.LOW:
             bit_pattern.append(1)  # Record 1 for the right button
             time.sleep(0.2)  # Debounce delay

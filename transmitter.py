@@ -8,16 +8,32 @@ import RPi.GPIO as GPIO
 def on_connect(client, userdata, flag, rc):
     # Read environment variable
     is_demo_mode = os.getenv('isDemoMode', 'false').lower() == 'true'
+    user_id = os.getenv('userID')
+    
+    client.publish("sheep/concerto", "1111")
+    
     print(is_demo_mode)
+    
+    button_press_count = 0
     
     while True:
         if hardware.wires_connected():
             if is_demo_mode:
                 # Demo mode: Only one button press required
-                print("Demo mode: Waiting for one button input...")
-                if GPIO.input(hardware.PIN_RIGHT_BUTTON) == GPIO.LOW:
-                    print("Button pressed. Processing...")
-                    client.publish("sheep/concerto", "Demo mode button pressed")
+                print("Demo mode: Waiting for button input...")
+                if GPIO.input(hardware.PIN_RIGHT_BUTTON) == GPIO.LOW:  #right_botton = 12
+                    button_press_count += 1  # Increment button press count
+                    #print("Button pressed {} times. Processing...", button_press_count)
+                    
+                    # Publish user_id + button press count
+                    message = "{}{}".format(user_id, button_press_count)
+                    client.publish("sheep/concerto", "I'm god")
+                    client.publish("sheep/concerto", message)
+                    print("Published message: {}", message)
+
+                    # Debounce delay to avoid multiple triggers for one press
+                    time.sleep(0.5)
+                    
             else:
                 # Standard mode: Generate 4-bit pattern
                 print("Wires connected. Waiting for button input...")

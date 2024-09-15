@@ -8,13 +8,14 @@ def on_connect(client, userdata, flag, rc):
     # Read environment variable
     is_demo_mode = os.getenv('isDemoMode', 'false').lower() == 'true'
     print(is_demo_mode)
+    client.publish("sheep/concerto", "1111")
     
     while True:
         if hardware.wires_connected():
             if is_demo_mode:
                 # Demo mode: Only one button press required
                 print("Demo mode: Waiting for one button input...")
-                if GPIO.input(hardware.PIN_RIGHT_BUTTON) == GPIO.LOW:
+                if GPIO.input(hardware.PIN_RIGHT_BUTTON) == GPIO.LOW: # pin_right = 
                     print("Button pressed. Processing...")
                     client.publish("sheep/concerto", "Demo mode button pressed")
             else:
