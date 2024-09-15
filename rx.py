@@ -2,20 +2,27 @@ import paho.mqtt.client as mqtt
 import random
 import hardware  # Import hardware functions
 import time
+import os  # Import os module to read environment variables
 
 def on_connect(client, userdata, flag, rc):
-    #client.publish("sheep/concerto", "LOG> {}: listener connected".format(str(client._client_id)))
-
+    # Read environment variable
+    is_demo_mode = os.getenv('isDemoMode', 'false').lower() == 'true'
+    print(is_demo_mode)
     
-    # Keep checking if wires are connected
     while True:
         if hardware.wires_connected():
-            print("Wires connected. Waiting for button input...")
-            # Capture 4-bit pattern from button inputs
-            bit_pattern = hardware.record_button_presses()
-            print("Generated 4-bit pattern: {}", format(bit_pattern))
-            client.publish("sheep/concerto", "4-bit pattern: {}".format(bit_pattern))
-
+            if is_demo_mode:
+                # Demo mode: Only one button press required
+                print("Demo mode: Waiting for one button input...")
+                if GPIO.input(hardware.PIN_RIGHT_BUTTON) == GPIO.LOW:
+                    print("Button pressed. Processing...")
+                    client.publish("sheep/concerto", "Demo mode button pressed")
+            else:
+                # Standard mode: Generate 4-bit pattern
+                print("Wires connected. Waiting for button input...")
+                bit_pattern = hardware.record_button_presses()
+                print("Generated 4-bit pattern: {}", format(bit_pattern))
+                client.publish("sheep/concerto", "4-bit pattern: {}".format(bit_pattern))
         else:
             print("Wires not connected.")
         time.sleep(1)  # Delay to avoid excessive CPU usage
