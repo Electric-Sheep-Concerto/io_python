@@ -1,2 +1,2 @@
-def get_demo_path(case, user, index):
-    return f"src/demo/{case}_{user}_{index}.mp3"
+def get_demo_path(user, index):
+    return f"src/demo/{user}_{index}.mp3"
