@@ -1,4 +1,4 @@
-from gpiozero import LED, Button  # gpiozeroモジュールを使用
+from gpiozero import LED, Button  # noqa E402
 from lib.constant import URL
 import time
 import json
