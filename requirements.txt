@@ -1,3 +1,5 @@
 pygame
 mutagen
 pyserial
+serial
+websocket-client
