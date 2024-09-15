@@ -8,6 +8,7 @@ if [ $BLE_MAC ]; then
     exit
     echo "Connected to $ble_mac"
 else
+    echo "Please provide BLE_MAC"
     exit 1
 fi
 nohup python tx.py &
