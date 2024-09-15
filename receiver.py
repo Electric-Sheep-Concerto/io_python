@@ -27,12 +27,12 @@ def on_message(client, userdata, msg):
             audio_key = msg.payload.decode().split(":")[1].replace(" ", "")
             audio_path = get_demo_path(audio_user, audio_key)
         else:
-            audio_path = f"src/nor/{get_normal_sample_data(msg.payload.decode().split(":")[1].replace(" ", ""))}.mp3"
+            audio_path = f"src/nor/{get_normal_sample_data(msg.payload.decode().split(':')[1].replace(' ', ''))}.mp3"
         play(audio_path)
 
 def on_disconnect(client, userdata, rc):
     if  rc != 0:
-        print(f"{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} Unexpected disconnection.")
+        print(f"{datetime.now().strftime('%Y-%m-%d %H:%M:%S')} Unexpected disconnection.")
 
 if __name__ == "__main__":
     client = mqtt.Client(client_id=str(random.randint(1000, 9999)))
