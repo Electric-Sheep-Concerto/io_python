@@ -2,8 +2,11 @@ from lib.constant import clientId
 import paho.mqtt.client as mqtt
 from lib.player import play
 import random
+from datetime import datetime
 
 def on_connect(client, userdata, flag, rc):
+    print(f"{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} Connected with result code {rc}")
+    client.subscribe("sheep/concerto")
     client.publish("sheep/concerto", f"LOG> {str(client._client_id.decode())}: listener connected(RX)")
 
 def on_message(client, userdata, msg):
@@ -17,7 +20,7 @@ def on_message(client, userdata, msg):
 
 def on_disconnect(client, userdata, rc):
     if  rc != 0:
-        print("Unexpected disconnection.")
+        print(f"{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} Unexpected disconnection.")
 
 if __name__ == "__main__":
     client = mqtt.Client(client_id=str(random.randint(1000, 9999)))
