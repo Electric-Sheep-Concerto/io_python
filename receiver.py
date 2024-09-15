@@ -5,6 +5,9 @@ import random
 from datetime import datetime
 from lib.res_demo import get_demo_sample_data
 
+demo_users = [] # [case1 user1, case1 user2, case2 user1, case2 user2]
+demo_user_index = [] # [case1 user1 index, case1 user2 index, case2 user1 index, case2 user2 index]
+
 def on_connect(client, userdata, flag, rc):
     print(f"{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} Connected with result code {rc}")
     client.subscribe("sheep/concerto")
