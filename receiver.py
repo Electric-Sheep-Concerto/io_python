@@ -1,18 +1,21 @@
 from gpiozero import LED, Button
-from lib.constant import URL
+from lib.constant import URL, clientId
 import time
 import paho.mqtt.client as mqtt
+from lib.player import play
 
 GPIO_SW1 = 17
 GPIO_SW2 = 5
 
 def on_connect(client, userdata, flag, rc):
-    client.publish("sheep/concerto", f"{client}: sender connected", qos=1)
-    ##### Waiting
-    time.sleep(0.1)
-    while True:
-        ##### Processing
-        client.publish("sheep/concerto", f"{client}: <ここに入力コマンドを入れる>")
+    client.publish("sheep/concerto", f"LOG> {str(client._client_id)}: listener connected")
+
+def on_message(client, userdata, msg):
+    if "LOG>" in msg.payload.decode() or str(client._client_id) == clientId: # ログ出力
+        return
+    else:
+        #### Play music
+        play("sample.mp3")
         pass
 
 def on_disconnect(client, userdata, rc):

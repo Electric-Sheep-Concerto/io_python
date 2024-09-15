@@ -1,17 +1,23 @@
 import paho.mqtt.client as mqtt
 import random
 from lib.player import play
+import time
 
 def on_connect(client, userdata, flag, rc):
     client.subscribe("sheep/concerto")
     client.publish("sheep/concerto", f"LOG> {str(client._client_id)}: listener connected")
+    ##### Waiting
+    time.sleep(0.1)
+    while True:
+        ##### Processing
+        client.publish("sheep/concerto", f"{client}: <ここに入力コマンドを入れる>")
+        pass
 
 def on_message(client, userdata, msg):
     if "LOG>" in msg.payload.decode() or str(client._client_id) == clientId: # ログ出力
         return
     else:
-        #### Play music
-        play("sample.mp3")
+        #### Processing
         pass
 
 def on_disconnect(client, userdata, rc):
