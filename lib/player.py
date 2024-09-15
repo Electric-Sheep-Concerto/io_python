@@ -4,16 +4,12 @@ import time
 
 
 def mutagen_length(path) -> float:
-    try:
-        audio = MP3(path)
-        if audio.info is not None:
-            length = audio.info.length
-        else:
-            length = 0.0
-        return length
-    finally:
-        return 0.0
-
+    audio = MP3(path)
+    if audio.info is not None:
+        length = audio.info.length
+    else:
+        length = 0.0
+    return length
 
 def play(file_path: str) -> None:
     length = mutagen_length(file_path)
