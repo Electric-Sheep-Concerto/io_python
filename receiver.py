@@ -3,7 +3,7 @@ import paho.mqtt.client as mqtt
 from lib.player import play
 import random
 from datetime import datetime
-from lib.res_demo import get_demo_sample_data
+from lib.res_normal import get_normal_sample_data
 import os
 from lib.demo.get_path import get_demo_path
 
@@ -27,7 +27,7 @@ def on_message(client, userdata, msg):
             audio_key = msg.payload.decode().split(":")[1].replace(" ", "")
             audio_path = get_demo_path(audio_user, audio_key)
         else:
-            audio_path = msg.payload.decode().split(":")[1].replace(" ", "")
+            audio_path = f"src/nor/{get_normal_sample_data(msg.payload.decode().split(":")[1].replace(" ", ""))}.mp3"
         play(audio_path)
 
 def on_disconnect(client, userdata, rc):
