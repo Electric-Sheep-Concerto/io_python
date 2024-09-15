@@ -1,11 +1,12 @@
 import json
-from constant import URL
+from lib.constant import URL
 import websocket
 
 url = f"wss://{URL}/"
 
 
 def on_message(ws, message):
+    # ここに処理を書く(受信)
     print("received: ", message)
     r = {"action": "sendmessage", "message": f"bot> {message}"}
     ws.send(json.dumps(r))

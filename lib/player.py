@@ -2,13 +2,18 @@ from pygame import mixier
 from mutagen.mp3 import MP3
 import time
 
+
 def mutagen_length(path) -> float:
     try:
         audio = MP3(path)
-        length = audio.info.length
+        if audio.info is not None:
+            length = audio.info.length
+        else:
+            length = 0.0
         return length
-    except:
-        return None
+    finally:
+        return 0.0
+
 
 def play(file_path: str) -> None:
     length = mutagen_length(file_path)
