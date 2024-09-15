@@ -4,6 +4,8 @@ from lib.player import play
 import random
 from datetime import datetime
 from lib.res_demo import get_demo_sample_data
+import os
+from lib.demo.get_path import get_demo_path
 
 demo_users = [] # [case1 user1, case1 user2, case2 user1, case2 user2]
 demo_user_index = [] # [case1 user1 index, case1 user2 index, case2 user1 index, case2 user2 index]
@@ -20,9 +22,11 @@ def on_message(client, userdata, msg):
     else:
         print(f"LOG> {str(client._client_id)}: {msg.payload.decode()}")
         #### Play music
-        audio_path = get_demo_sample_data(msg.payload.decode().split(":")[1].replace(" ", ""))
+        if os.getenv("MODE") == "demo":
+            audio_path = get_demo_path(msg.payload.decode().split(":")[1].replace(" ", ""))
+        else:
+            audio_path = msg.payload.decode().split(":")[1].replace(" ", "")
         play(audio_path)
-        pass
 
 def on_disconnect(client, userdata, rc):
     if  rc != 0:
