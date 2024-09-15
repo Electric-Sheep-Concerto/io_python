@@ -3,7 +3,8 @@ import random
 import hardware  # Import hardware functions
 
 def on_connect(client, userdata, flag, rc):
-    client.publish("sheep/concerto", f"LOG> {str(client._client_id)}: listener connected")
+    #client.publish("sheep/concerto", "LOG> {}: listener connected".format(str(client._client_id)))
+
     
     # Keep checking if wires are connected
     while True:
@@ -11,8 +12,9 @@ def on_connect(client, userdata, flag, rc):
             print("Wires connected. Waiting for button input...")
             # Capture 4-bit pattern from button inputs
             bit_pattern = hardware.record_button_presses()
-            print(f"Generated 4-bit pattern: {bit_pattern}")
-            client.publish("sheep/concerto", f"4-bit pattern: {bit_pattern}")
+            print("Generated 4-bit pattern: {}", format(bit_pattern))
+            client.publish("sheep/concerto", "4-bit pattern: {}".format(bit_pattern))
+
         else:
             print("Wires not connected.")
         time.sleep(1)  # Delay to avoid excessive CPU usage
