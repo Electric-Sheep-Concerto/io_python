@@ -1,11 +1,6 @@
-from gpiozero import LED, Button
-from lib.constant import URL, clientId
-import time
+from lib.constant import clientId
 import paho.mqtt.client as mqtt
 from lib.player import play
-
-GPIO_SW1 = 17
-GPIO_SW2 = 5
 
 def on_connect(client, userdata, flag, rc):
     client.publish("sheep/concerto", f"LOG> {str(client._client_id)}: listener connected")
