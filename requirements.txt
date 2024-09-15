@@ -4,3 +4,4 @@ pyserial
 serial
 websocket-client
 gpiozero
+gpiozero-stubs
