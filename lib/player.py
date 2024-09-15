@@ -1,4 +1,4 @@
-from pygame import mixier
+from pygame import mixer
 from mutagen.mp3 import MP3
 import time
 
@@ -17,9 +17,9 @@ def mutagen_length(path) -> float:
 
 def play(file_path: str) -> None:
     length = mutagen_length(file_path)
-    mixier.init()
-    mixier.music.load(file_path)
-    mixier.music.play()
+    mixer.init()
+    mixer.music.load(file_path)
+    mixer.music.play()
     time.sleep(int(length) + 1)
-    mixier.music.stop()
+    mixer.music.stop()
     return

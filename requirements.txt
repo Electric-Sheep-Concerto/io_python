@@ -1,7 +1,4 @@
 pygame
 mutagen
-pyserial
-serial
-websocket-client
 gpiozero
-gpiozero-stubs
+paho-mqtt
