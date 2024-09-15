@@ -5,10 +5,10 @@ from lib.player import play
 def on_connect(client, userdata, flag, rc):
     print("Connected with result code " + str(rc))
     client.subscribe("sheep/concerto")
-    client.publish("sheep/concerto", f"{client}: listener connected", qos=1)
+    client.publish("sheep/concerto", f"LOG> {client}: listener connected")
 
 def on_message(client, userdata, msg):
-    if msg.qos == 1: # ログ出力
+    if "LOG>" in msg.payload.decode() or str(client._client_id) == clientId: # ログ出力
         return
     else:
         #### 音声出力の処理（仮実装
