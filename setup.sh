@@ -1,9 +1,11 @@
 #!/bin/bash
 ble_mac="$BLE_MAC"
 sudo bluetoothctl << EOF
-if pair $ble_mac; then
+if [ $BLE_MAC ]; then
+    pair $ble_mac
     trust $ble_mac
     connect $ble_mac || true
+    echo "Connected to $ble_mac"
 else
     exit 1
 fi
