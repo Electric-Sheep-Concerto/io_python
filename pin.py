@@ -10,8 +10,9 @@ def on_connect(client, userdata, flag, rc):
     client.publish("sheep/concerto", f"{client}: sender connected", qos=1)
     ##### GPIO安定化のための待機
     time.sleep(0.1)
-    ##### GPIO処理の追加
     while True:
+        ##### GPIO処理の追加
+        client.publish("sheep/concerto", f"{client}: <ここに入力コマンドを入れる>")
         pass
 
 def on_disconnect(client, userdata, rc):

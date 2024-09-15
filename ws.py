@@ -3,7 +3,6 @@ import random
 from lib.player import play
 
 def on_connect(client, userdata, flag, rc):
-    print("Connected with result code " + str(rc))
     client.subscribe("sheep/concerto")
     client.publish("sheep/concerto", f"LOG> {str(client._client_id)}: listener connected")
 
