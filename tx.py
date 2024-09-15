@@ -5,6 +5,7 @@ from lib.player import play
 def on_connect(client, userdata, flag, rc):
     client.subscribe("sheep/concerto")
     client.publish("sheep/concerto", f"LOG> {str(client._client_id)}: listener connected")
+    ##ここでボタンを読み込んで4ビット
 
 def on_message(client, userdata, msg):
     if "LOG>" in msg.payload.decode() or str(client._client_id) == clientId: # ログ出力
