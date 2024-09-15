@@ -13,9 +13,12 @@ def mutagen_length(path) -> float:
 
 def play(file_path: str) -> None:
     length = mutagen_length(file_path)
-    mixer.init()
-    mixer.music.load(file_path)
-    mixer.music.play()
-    time.sleep(int(length) + 1)
-    mixer.music.stop()
+    try:
+        mixer.init()
+        mixer.music.load(file_path)
+        mixer.music.play()
+        time.sleep(int(length) + 1)
+        mixer.music.stop()
+    except FileNotFoundError:
+        print(f"File not found: {file_path}")
     return
