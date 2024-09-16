@@ -1,4 +1,4 @@
-from random import randint
+import os
 BOUD = 115200
 URL = "localhost"
-clientId = randint(1, 1000)   
+clientId = os.getenv("CLIENT_ID", "1000")

@@ -55,7 +55,7 @@ def on_disconnect(client, userdata, rc):
 
 if __name__ == "__main__":
     clientId = random.randint(1, 1000)
-    client = mqtt.Client(client_id=str(clientId))
+    client = mqtt.Client(client_id=str(random.randint(1000, 9999)))
     client.on_connect = on_connect
     client.on_disconnect = on_disconnect
     client.on_message = on_message
