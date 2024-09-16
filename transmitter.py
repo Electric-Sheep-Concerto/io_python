@@ -10,8 +10,6 @@ def on_connect(client, userdata, flag, rc):
     is_demo_mode = os.getenv('isDemoMode', 'false').lower() == 'true'
     user_id = os.getenv('userID')
     
-    client.publish("sheep/concerto", "1111")
-    
     print(is_demo_mode)
     
     button_press_count = 0
