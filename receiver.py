@@ -16,7 +16,7 @@ def on_connect(client, userdata, flag, rc):
     client.publish("sheep/concerto", f"LOG> {str(client._client_id.decode())}: listener connected(RX)")
 
 def on_message(client, userdata, msg):
-    message_content = message_content.split("#")[0]
+    message_content = msg.payload.decode().split("#")[0]
     if "LOG>" in message_content or clientId in message_content.split(":")[0]: # ログ出力
         print(message_content)
         return
