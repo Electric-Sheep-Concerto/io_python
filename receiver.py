@@ -16,15 +16,16 @@ def on_connect(client, userdata, flag, rc):
     client.publish("sheep/concerto", f"LOG> {str(client._client_id.decode())}: listener connected(RX)")
 
 def on_message(client, userdata, msg):
-    if "LOG>" in msg.payload.decode() or clientId in msg.payload.decode().split(":")[0]: # ログ出力
-        print(msg.payload.decode())
+    message_content = msg.payload.decode().split("#")[0]
+    if "LOG>" in message_content or clientId in message_content.split(":")[0]: # ログ出力
+        print(message_content)
         return
     else:
-        print(f"LOG> {str(client._client_id)}: {msg.payload.decode()}")
+        print(f"LOG> {str(client._client_id)}: {message_content}")
         #### Play music
-        if os.getenv("isDemoMode") == "True" or "DBG>" in msg.payload.decode():
-            audio_user = msg.payload.decode().split(":")[0].split(">")[1].replace(" ", "")
-            audio_key = msg.payload.decode().split(":")[1].replace(" ", "")
+        if os.getenv("isDemoMode") == "True" or "DBG>" in message_content:
+            audio_user = message_content.split(":")[0].split(">")[1].replace(" ", "")
+            audio_key = message_content.split(":")[1].replace(" ", "")
             audio_path = get_demo_path(audio_user, audio_key)
         else:
             audio_path = f"src/nor/{get_normal_sample_data(msg.payload.decode().split(':')[1].replace(' ', ''))}.mp3"
