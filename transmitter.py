@@ -5,6 +5,10 @@ import time
 import os  # Import os module to read environment variables
 import RPi.GPIO as GPIO
 
+LED_PIN = 4   
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(LED_PIN, GPIO.OUT)
+
 def on_connect(client, userdata, flag, rc):
     # Read environment variable
     is_demo_mode = os.getenv('isDemoMode', 'false').lower() == 'true'
@@ -17,6 +21,7 @@ def on_connect(client, userdata, flag, rc):
     while True:
         if hardware.wires_connected():
             if is_demo_mode:
+                GPIO.output(LED_PIN, GPIO.HIGH)
                 # Demo mode: Only one button press required
                 print("Demo mode: Waiting for button input...")
                 if GPIO.input(hardware.PIN_RIGHT_BUTTON) == GPIO.LOW:  #right_botton = 12
@@ -39,6 +44,7 @@ def on_connect(client, userdata, flag, rc):
                 print("Generated 4-bit pattern: {}", format(bit_pattern))
                 client.publish("sheep/concerto", "4-bit pattern: {}".format(bit_pattern))
         else:
+            GPIO.output(LED_PIN, GPIO.LOW)
             print("Wires not connected.")
         time.sleep(1)  # Delay to avoid excessive CPU usage
 

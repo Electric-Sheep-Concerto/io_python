@@ -1,0 +1,63 @@
+/home/pi/io_python/transmitter.py:30: DeprecationWarning: Callback API version 1 is deprecated, update to latest version
+  client = mqtt.Client(client_id=str(random.randint(1000, 9999)))
+pygame 1.9.6
+Hello from the pygame community. https://www.pygame.org/contribute.html
+Traceback (most recent call last):
+  File "/home/pi/io_python/transmitter.py", line 37, in <module>
+    client.loop_forever()
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 2297, in loop_forever
+    rc = self._loop(timeout)
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 1663, in _loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+python3: can't open file '/home/pi/io_python/reciever.py': [Errno 2] No such file or directory
+/home/pi/io_python/receiver.py:38: DeprecationWarning: Callback API version 1 is deprecated, update to latest version
+  client = mqtt.Client(client_id=str(random.randint(1000, 9999)))
+pygame 1.9.6
+Hello from the pygame community. https://www.pygame.org/contribute.html
+2024-09-16 09:36:51 Connected with result code 0
+LOG> 4756: listener connected(RX)
+Traceback (most recent call last):
+  File "/home/pi/io_python/receiver.py", line 45, in <module>
+    client.loop_forever()
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 2297, in loop_forever
+    rc = self._loop(timeout)
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 1663, in _loop
+    socklist = select.select(rlist, wlist, [], timeout)
+KeyboardInterrupt
+/home/pi/io_python/receiver.py:38: DeprecationWarning: Callback API version 1 is deprecated, update to latest version
+  client = mqtt.Client(client_id=str(random.randint(1000, 9999)))
+/home/pi/io_python/transmitter.py:30: DeprecationWarning: Callback API version 1 is deprecated, update to latest version
+  client = mqtt.Client(client_id=str(random.randint(1000, 9999)))
+pygame 1.9.6
+Hello from the pygame community. https://www.pygame.org/contribute.html
+2024-09-16 09:36:57 Connected with result code 0
+LOG> 6013: listener connected(RX)
+LOG> b'6013': CMD> 98989: 4
+LOG> b'6013': CMD> 98989: 4
+LOG> b'6013': CMD> 98989: 4
+LOG> 8214: listener connected(RX)
+LOG> 1443: listener connected(RX)
+LOG> 4613: listener connected(RX)
+LOG> 4613: Transmitter connected(TX)
+LOG> b'6013': asdTrue
+Traceback (most recent call last):
+  File "/home/pi/io_python/receiver.py", line 45, in <module>
+    client.loop_forever()
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 2297, in loop_forever
+    rc = self._loop(timeout)
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 1686, in _loop
+    rc = self.loop_read()
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 2100, in loop_read
+    rc = self._packet_read()
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 3142, in _packet_read
+    rc = self._packet_handle()
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 3808, in _packet_handle
+    return self._handle_publish()
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 4145, in _handle_publish
+    self._handle_on_message(message)
+  File "/home/pi/.local/lib/python3.9/site-packages/paho/mqtt/client.py", line 4501, in _handle_on_message
+    on_message(self, self._userdata, message)
+  File "/home/pi/io_python/receiver.py", line 30, in on_message
+    audio_path = f"src/nor/{get_normal_sample_data(msg.payload.decode().split(':')[1].replace(' ', ''))}.mp3"
+IndexError: list index out of range
